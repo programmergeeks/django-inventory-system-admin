@@ -1,1 +1,0 @@
-"# django-inventory-system-admin" 
