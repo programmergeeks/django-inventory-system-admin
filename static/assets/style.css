@@ -2,7 +2,10 @@ body{
     background: rgb(230, 227, 227);
 }
 
-.my-card:hover{
+.my-card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.my-card:hover {
     transform: scale(1.1);
-    transition: 0.2s ease-in-out;
 }
