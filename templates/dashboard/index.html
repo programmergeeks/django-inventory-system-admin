@@ -4,7 +4,7 @@ Victoria's StockControl
 {% endblock  %}
 
 {% block content %}
-
+{% if user.is_authenticated and user.is_staff and user.is_superuser %}
 {% include 'component/topStatisticsAndInfo.html' %}
 
 
@@ -101,6 +101,10 @@ Victoria's StockControl
             </div>
         </div>
     </div>
-    <!--End Graphs-->
-      
+     <!--End Graphs-->
+{% else %} 
+    {% include 'dashboard/staff_index.html' %}
+
+{% endif %}      
+
 {% endblock %}

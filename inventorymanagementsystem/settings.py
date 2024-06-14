@@ -128,6 +128,10 @@ STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]  
 
+MEDIA_ROOT = (BASE_DIR/"media/")
+
+MEDIA_URL = '/media/'
+
 LOGIN_REDIRECT_URL = 'dashboard-index'
 
 LOGIN_URL = 'user-login'
