@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    staff = models.OneToOneField(User, on_delete=models.CASCADE)
-    address = models.CharField(max_length=200)
-    phone = models.CharField(max_length=50)
+    staff = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    address = models.CharField(max_length=200, null=True)
+    phone = models.CharField(max_length=50, null=True)
     image = models.ImageField(default='default.png',
                               upload_to='profile_images')
 
