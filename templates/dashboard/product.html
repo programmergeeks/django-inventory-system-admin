@@ -2,7 +2,7 @@
 {% block title %}
 Products' List
 {% endblock  %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 {% include 'component/topStatisticsAndInfo.html' %}
@@ -15,26 +15,13 @@ Products' List
             <div class="border bg-white p-3">
                 <h4>Add Products</h4>
                 <hr>
-                <form action="">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Name</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <br>
+                    <div class="d-grid gap-2">
+                        <input class="btn btn-success" type="submit" value="Add">
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Quantity</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="form-group ">
-                        <label for="inputState">Category</label>
-                        <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                        </select>
-                    </div>
-
-                    <input class="btn btn-success btn-block" type="submit" value="Add Product">
-
                 </form>
             </div>
         </div>
@@ -55,8 +42,8 @@ Products' List
                         <td>{{ products.category }}</td>
                         <td>{{ products.quantity }}</td>
                         <td>
-                            <a class="btn btn-info btn-sm" href="">Edit</a>
-                            <a class="btn btn-danger btn-sm" href="">Delete</a>
+                            <a class="btn btn-info btn-sm mr-2" href="{% url 'dashboard-products-edit' products.id %}">Edit</a>
+                            <a class="btn btn-danger btn-sm ml-2" href="{% url 'dashboard-products-delete' products.id %}">Delete</a>
                         </td>
                     </tr>
                     {% endfor %}
