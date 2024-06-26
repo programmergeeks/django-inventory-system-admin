@@ -1,6 +1,7 @@
 # from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .models import Product
 
 # Create your views here.
 
@@ -17,7 +18,16 @@ def staff(request):
 #Request for viewing staff page via render
 @login_required
 def product(request):
-    return render(request,'dashboard/product.html')
+    products = Product.objects.all()
+
+    context = {
+        'products': products,
+        # 'form': form,
+        # 'customer_count': customer_count,
+        # 'product_count': product_count,
+        # 'order_count': order_count,
+    }
+    return render(request,'dashboard/product.html', context)
 
 #Request for viewing staff page via render
 @login_required

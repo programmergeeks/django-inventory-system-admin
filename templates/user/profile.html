@@ -3,18 +3,18 @@
 
 {% block content %}
 <div class="container row my-4">
-    <div class="col-md-4"></div>
-    <div class="col-md-8">
+    <div class="col-md-2"></div>
+    <div class="col-md-10">
         <div class="card">
             <div class="card-header bg-info text-white">
-                Customer Detail Page
+                Staff Detail Page
             </div>
             <div class="row p-3">
                 <div class="col-md-8">
                     <table class="table table-borderless">
                         <thead>
                             <span class="h4">Porfile Information</span class="h4">
-                            <a class="btn btn-info btn-sm float-right ms-2" href="#">Edit</a>
+                            <a class="btn btn-info btn-sm float-right ms-2" href="{% url 'user-profile-update' %}">Edit</a>
                             <hr>
                         </thead>
                         <tbody>
