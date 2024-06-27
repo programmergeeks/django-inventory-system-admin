@@ -10,7 +10,21 @@ from django.contrib.auth.models import User
 #Request for viewing index page via render
 @login_required
 def index(request):
-    return render(request,'dashboard/index.html')
+    orders = Order.objects.all()
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.staff = request.user
+            obj.save()
+            return redirect('dashboard-index')
+    else:
+        form = OrderForm()
+    context = {
+        'orders': orders,
+        'form': form,
+    }
+    return render(request,'dashboard/index.html', context)
 
 #Request for viewing staff page via render
 @login_required
