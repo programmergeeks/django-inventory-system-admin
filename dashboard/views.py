@@ -1,8 +1,9 @@
 # from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Product
-from .forms import ProductForm
+from .models import Product, Order
+from .forms import ProductForm, OrderForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -14,7 +15,21 @@ def index(request):
 #Request for viewing staff page via render
 @login_required
 def staff(request):
-    return render(request,'dashboard/staff.html')
+    employee = User.objects.all()
+
+    context = {
+        'employee': employee
+    }
+
+    return render(request,'dashboard/staff.html', context)
+
+def staff_detail(request, pk):
+    employee = User.objects.get(id=pk)
+    context = {
+        'employee': employee
+    }
+
+    return render(request,'dashboard/staff_detail.html', context)
 
 #Request for viewing staff page via render
 @login_required
@@ -70,4 +85,13 @@ def product_edit(request, pk):
 #Request for viewing staff page via render
 @login_required
 def order(request):
-    return render(request,'dashboard/order.html')
+    orders = Order.objects.all()
+
+    context = {
+        'orders': orders,
+        # 'customer_count': customer_count,
+        # 'product_count': product_count,
+        # 'order_count': order_count,
+    }
+
+    return render(request, 'dashboard/order.html', context)

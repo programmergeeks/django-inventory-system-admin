@@ -1,0 +1,60 @@
+{% extends 'component/basePage.html' %}
+{% block title %}
+Employee List
+{% endblock %}
+
+{% block content %}
+
+{% include 'component/topStatisticsAndInfo.html' %}
+
+
+<!--Profile View-->
+<div class="container">
+    <div class="row my-4">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    Staff Detail Page
+                </div>
+                <div class="row p-3">
+                    <div class="col-md-8">
+                        <table class="table table-borderless">
+                            <thead>
+                                <span class="h4">Profile Information</span>
+                                <a class="btn btn-info btn-md float-end" href="{% url 'dashboard-staff' %}">Back</a>
+                                <hr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Name</th>
+                                    <td>{{ employee.first_name }} {{ employee.last_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Email</th>
+                                    <td>{{ employee.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Phone</th>
+                                    <td>{{ employee.profile.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Address</th>
+                                    <td>{{ employee.profile.address }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <img class="img-thumbnail" src="{{ employee.profile.image.url }}" alt="profile-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--End Profile View-->
+
+{% endblock %}
