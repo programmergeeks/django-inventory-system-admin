@@ -11,8 +11,14 @@ from django.contrib import messages
 #Request for viewing index page via render
 @login_required
 def index(request):
+    employee = User.objects.all()
     orders = Order.objects.all()
     product = Product.objects.all()
+
+    employee_count = employee.count()
+    product_count = product.count()
+    order_count = orders.count()
+
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -26,6 +32,9 @@ def index(request):
         'orders': orders,
         'form': form,
         'product': product,
+        'employee_count': employee_count,
+        'product_count': product_count,
+        'order_count': order_count
     }
     return render(request,'dashboard/index.html', context)
 
@@ -33,9 +42,18 @@ def index(request):
 @login_required
 def staff(request):
     employee = User.objects.all()
+    products = Product.objects.all()
+    orders = Order.objects.all()
 
+    employee_count = employee.count()
+    product_count = products.count()
+    order_count = orders.count()
+    
     context = {
-        'employee': employee
+        'employee': employee,
+        'employee_count': employee_count,
+        'product_count': product_count,
+        'order_count': order_count
     }
 
     return render(request,'dashboard/staff.html', context)
@@ -51,7 +69,13 @@ def staff_detail(request, pk):
 #Request for viewing staff page via render
 @login_required
 def product(request):
+    employee = User.objects.all()
     products = Product.objects.all()
+    orders = Order.objects.all()
+
+    employee_count = employee.count()
+    product_count = products.count()
+    order_count = orders.count()
 
     if request.method == 'POST':
         form = ProductForm(request.POST)
@@ -66,9 +90,9 @@ def product(request):
     context = {
         'products': products,
         'form': form,
-        # 'customer_count': customer_count,
-        # 'product_count': product_count,
-        # 'order_count': order_count,
+        'employee_count': employee_count,
+        'product_count': product_count,
+        'order_count': order_count,
     }
     return render(request,'dashboard/product.html', context)
 
@@ -104,13 +128,19 @@ def product_edit(request, pk):
 #Request for viewing staff page via render
 @login_required
 def order(request):
+    employee = User.objects.all()
+    products = Product.objects.all()
     orders = Order.objects.all()
+
+    employee_count = employee.count()
+    product_count = products.count()
+    order_count = orders.count()
 
     context = {
         'orders': orders,
-        # 'customer_count': customer_count,
-        # 'product_count': product_count,
-        # 'order_count': order_count,
+        'employee_count': employee_count,
+        'product_count': product_count,
+        'order_count': order_count,
     }
 
     return render(request, 'dashboard/order.html', context)
